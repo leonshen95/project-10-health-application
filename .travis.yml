@@ -1,22 +1,5 @@
 matrix:
   include:
-  - language: python
-    group: travis_latest
-    dist: xenial
-
-    git:
-      depth: 25
-      quiet: true
-
-    python:
-    - 3.7
-
-    before_script:
-    - cd Classifier
-
-    script:
-    - flake8 --extend-ignore=W,E1,E2,E3,E5
-
   - language: android
     java: oraclejdk8
     sudo: true
@@ -45,8 +28,22 @@ matrix:
       depth: 25
       quiet: true
 
+    script:
+    - .android/HealthApp/gradlew build
+  
+  - language: python
+    group: travis_latest
+    dist: xenial
+
+    git:
+      depth: 25
+      quiet: true
+
+    python:
+    - 3.7
+
     before_script:
-    - cd android/HealthApp
+    - cd Classifier
 
     script:
-    - ./gradlew build
+    - flake8 --extend-ignore=W,E1,E2,E3,E5
