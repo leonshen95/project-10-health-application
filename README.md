@@ -6,6 +6,15 @@ In this project, we will build a health advisor based on patterns your phone kno
 ## System Design
 <img src="./images/system_diagram.PNG">  
 
+## User Story
+As an user of Health app, I will most likely to use it to monitor my daily activities:
+- Display six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) if possible
+- Display the distance of performing each activity
+- Calculate the corresponding calories consumption for each activity
+- Sum up the calories for all activity and generate a final score
+- Able to set up a health goal(plan) for a period of time
+- Compare the goal and actual score in real life to see if accomplishment checks.
+
 ## Iterations Plan
 
 ### Sprint 1
