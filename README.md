@@ -9,6 +9,7 @@ In this project, we will build a health advisor based on patterns your phone kno
 ## User Story
 As an user of Health app, I will most likely to use it to monitor my daily activities:
 - Display six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) if possible
+- Monitor user activity continuously in the background
 - Display the distance of performing each activity
 - Calculate the corresponding calories consumption for each activity
 - Sum up the calories for all activity and generate a final score
