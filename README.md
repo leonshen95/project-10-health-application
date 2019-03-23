@@ -16,6 +16,10 @@ As an user of Health app, I will most likely to use it to monitor my daily activ
 - Able to set up a health goal(plan) for a period of time
 - Compare the goal and actual score in real life to see if accomplishment checks.
 
+## Development Environment setup
+- The user interface is developed in [Android Studio](https://developer.android.com/studio/?gclid=EAIaIQobChMIh9Dg9_CY4QIVLrCzCh1FhAj9EAAYASAAEgJ_TPD_BwE). The XML files will correlated with Java files.
+- The emulator is temporarily set as "Nexus 4 API23".
+
 ## Iterations Plan
 
 ### Sprint 1
