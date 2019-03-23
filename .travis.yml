@@ -1,5 +1,6 @@
 language: android
 java: oraclejdk8
+sudo: true
 android:
   components:
     # Uncomment the lines below if you want to
