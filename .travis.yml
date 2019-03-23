@@ -1,4 +1,23 @@
-language: python
+language: android
+java: oraclejdk8
+android:
+  components:
+    # Uncomment the lines below if you want to
+    # use the latest revision of Android SDK Tools
+    - platform-tools
+    - tools
+              
+    # The BuildTools version used by your project
+    - build-tools-26.1.1
+              
+    # The SDK version used to compile your project
+    - android-28
+              
+    # Additional components
+    #- extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-19
 group: travis_latest
 dist: xenial
 
@@ -6,8 +25,5 @@ git:
   depth: 25
   quiet: true
 
-python:
-- 3.7
-
 script:
-- flake8 --extend-ignore=W,E1,E2,E3,E5
+- ./android/HealthApp/gradlew build
