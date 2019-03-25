@@ -20,7 +20,7 @@ As an user of Health app, I will most likely to use it to monitor my daily activ
 - The user interface is developed in [Android Studio](https://developer.android.com/studio/?gclid=EAIaIQobChMIh9Dg9_CY4QIVLrCzCh1FhAj9EAAYASAAEgJ_TPD_BwE). The XML files will correlated with Java files.
 - The emulator is temporarily set as "Nexus 4 API23".
 ## User Interface
-<img src="https://github.com/ec500-software-engineering/project-10-health-application/blob/master/ui.png?raw=true">
+<img src="./images/ui.png">
 ## Iterations Plan
 
 ### Sprint 1
