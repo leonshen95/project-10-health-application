@@ -1,8 +1,6 @@
 package bu.edu.ec500.sshealthapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-
 import androidx.lifecycle.ViewModelProviders;
 import bu.edu.ec500.sshealthapp.ui.main.MainFragment;
 import bu.edu.ec500.sshealthapp.ui.main.MainViewModel;
@@ -17,6 +15,13 @@ import com.hookedonplay.decoviewlib.charts.DecoDrawEffect;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
 
+/**
+ * Sample to create an animated arc based chart in the style used by Google Fit
+ * <p/>
+ * This is achieved using the open source DecoView library.
+ *
+ * @see <a href="https://github.com/bmarrdev/android-DecoView-charting">DecoView on GitHub</a>
+ */
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -52,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 //                    .commitNow();
 //        }
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+
 
         mDecoView = (DecoView) findViewById(R.id.dynamicArcView);
 
