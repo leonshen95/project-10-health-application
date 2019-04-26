@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,14 +7,116 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainFragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/textActivity3">
+
+        <TextView
+            android:id="@+id/textPercentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="40sp"/>
+
+        <TextView
+            android:id="@+id/textRemaining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textPercentage"
+            android:layout_centerHorizontal="true"
+            android:maxWidth="200dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+        <com.hookedonplay.decoviewlib.DecoView xmlns:custom="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/dynamicArcView"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginLeft="13dp"
+            android:layout_width="312dp"
+            android:layout_height="318dp"
+            custom:dv_lineWidth="22dp">
+
+        </com.hookedonplay.decoviewlib.DecoView>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageActivity1"
+        android:layout_width="40dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/circle_activity1"
+        android:contentDescription="@string/fit_standing"
+        android:padding="12dp"
+        android:src="@drawable/circle_activity1" />
+
+    <ImageView
+        android:id="@+id/imageActivity3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/circle_activity3"
+        android:contentDescription="@string/fit_stairring"
+        android:padding="12dp"
+        android:src="@drawable/circle_activity3" />
+
+    <ImageView
+        android:id="@+id/imageActivity2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignTop="@+id/imageActivity3"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginRight="9dp"
+        android:background="@drawable/circle_activity2"
+        android:contentDescription="@string/fit_running"
+        android:padding="12dp"
+        android:src="@drawable/circle_activity2" />
+
     <TextView
-        android:id="@+id/message"
+        android:id="@+id/textActivity3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MainFragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_above="@+id/imageActivity3"
+        android:layout_alignLeft="@id/imageActivity3"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/imageActivity3"
+        android:paddingRight="4dp"
+        android:gravity="center_horizontal"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/textActivity1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageActivity1"
+        android:layout_marginLeft="0dp"
+        android:layout_alignRight="@+id/imageActivity1"
+        android:gravity="center_horizontal"
+
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:id="@+id/textActivity2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageActivity2"
+        android:layout_alignLeft="@+id/imageActivity2"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/imageActivity2"
+        android:gravity="center_horizontal"
+        android:paddingRight="4dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+</RelativeLayout>

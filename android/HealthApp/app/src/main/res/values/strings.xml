@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">ssHealthApp</string>
+    <string name="app_name">Health Application</string>
+    <string name="fit_standing">Standing</string>
+    <string name="fit_running">Running</string>
+    <string name="fit_stairring">Stairing</string>
+    <string name="title_activity_test">testActivity</string>
 </resources>
