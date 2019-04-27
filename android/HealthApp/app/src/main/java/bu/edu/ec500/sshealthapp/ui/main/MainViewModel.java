@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 
 public class MainViewModel extends ViewModel {
 
+
     private MutableLiveData<Double> accX;
     private MutableLiveData<Double> accY;
     private MutableLiveData<Double> accZ;
