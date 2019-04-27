@@ -1,5 +1,6 @@
 package bu.edu.ec500.sshealthapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -12,15 +13,17 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
-public class TestActivity extends AppCompatActivity implements SensorEventListener {
+public class TestActivity extends AppCompatActivity {
 
     private MainViewModel mViewModel;
-    private SensorManager mSensorManager;
-    private Sensor mAccSensor;
-    private Sensor mGyroSensor;
+    private TextView[] textViews = new TextView[6];
+    private double[] caloris = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+
+    private SensorRecognizeImpl mSensorRecogImpl;
 
     public void registerAllObserver() {
         final Observer<Double> accXObserver = new Observer<Double>() {
@@ -79,56 +82,109 @@ public class TestActivity extends AppCompatActivity implements SensorEventListen
         mViewModel.getGyroZ().observe(this, gyroZObserver);
     }
 
+    private void recordAllTextViews() {
+        int[] ids = {
+                R.id.accXTextView,
+                R.id.accYTextView,
+                R.id.accZTextView,
+                R.id.gyroXTextView,
+                R.id.gyroYTextView,
+                R.id.gyroZTextView };
+
+        for (int i = 0; i < ids.length; ++i) {
+            textViews[i] = (TextView) findViewById(ids[i]);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        recordAllTextViews();
 
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mAccSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mGyroSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        updateCaloris();
 
-        registerAllObserver();
+//        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+
+//        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+//        mAccSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+//        mGyroSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+
+//        registerAllObserver();
+
+        mSensorRecogImpl = new SensorRecognizeImpl(new MyInitCallback(), new MyCallback());
+        mSensorRecogImpl.init(this);
     }
 
-    @Override
-    public final void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // Do something here if sensor accuracy changes.
-    }
-
-    @Override
-    public final void onSensorChanged(SensorEvent event) {
-        // The light sensor returns a single value.
-        // Many sensors return 3 values, one for each axis.
-        double x = event.values[0];
-        double y = event.values[1];
-        double z = event.values[2];
-        // Do something with this sensor value.
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            mViewModel.getAccX().setValue(x);
-            mViewModel.getAccY().setValue(y);
-            mViewModel.getAccZ().setValue(z);
-        }
-        else if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
-            mViewModel.getGyroX().setValue(x);
-            mViewModel.getGyroY().setValue(y);
-            mViewModel.getGyroZ().setValue(z);
-        }
-    }
+//    @Override
+//    public final void onAccuracyChanged(Sensor sensor, int accuracy) {
+//        // Do something here if sensor accuracy changes.
+//    }
+//
+//    @Override
+//    public final void onSensorChanged(SensorEvent event) {
+//        // The light sensor returns a single value.
+//        // Many sensors return 3 values, one for each axis.
+//        double x = event.values[0];
+//        double y = event.values[1];
+//        double z = event.values[2];
+//        // Do something with this sensor value.
+//        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+//            mViewModel.getAccX().setValue(x);
+//            mViewModel.getAccY().setValue(y);
+//            mViewModel.getAccZ().setValue(z);
+//        }
+//        else if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
+//            mViewModel.getGyroX().setValue(x);
+//            mViewModel.getGyroY().setValue(y);
+//            mViewModel.getGyroZ().setValue(z);
+//        }
+//    }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener(this, mAccSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(this, mGyroSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        if (mSensorRecogImpl.isInitialized()) {
+            mSensorRecogImpl.start();
+        }
     }
 
     @Override
     protected void onPause() {
+        if (mSensorRecogImpl.isInitialized()) {
+            mSensorRecogImpl.stop();
+        }
         super.onPause();
-        mSensorManager.unregisterListener(this);
+    }
+
+    class MyInitCallback implements AppInitCallback {
+        @Override
+        public void onSucceeded() {
+            Toast.makeText(getApplicationContext(), "initialization succeeded", Toast.LENGTH_LONG).show();
+            mSensorRecogImpl.start();
+        }
+
+        @Override
+        public void onFailed(AppResult error) {
+            Toast.makeText(getApplicationContext(), "initialization failed", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    class MyCallback implements AppResultCallback<RecognizedActivityResult> {
+        @Override
+        public void onResult(@NonNull RecognizedActivityResult results) {
+            RecognizedActivity activity = results.getMostProbableActivity();
+            caloris[activity.getActivityType()] += RecognizedActivity.getActivityCalorisByType(activity.getActivityType()) *
+                    results.time;
+            updateCaloris();
+        }
+    }
+
+    private void updateCaloris() {
+        for (int i = 0; i < caloris.length; ++i) {
+            textViews[i].setText(String.format(Locale.ENGLISH, "%.5f", caloris[i]));
+        }
     }
 }

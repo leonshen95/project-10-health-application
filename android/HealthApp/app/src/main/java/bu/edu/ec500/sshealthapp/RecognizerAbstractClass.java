@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.SparseIntArray;
 
+import java.util.Random;
+
 public abstract class RecognizerAbstractClass {
     abstract void onResult(double[] confidences);
 
@@ -22,11 +24,14 @@ public abstract class RecognizerAbstractClass {
 
     public SensorData[] dataSet;
 
-    RecognizerAbstractClass() {
+    public AppResultCallback resultCallback;
+
+    RecognizerAbstractClass(AppResultCallback resultCallback) {
         chosenSensors = new SparseIntArray();
         samplingInterval = 20;
         samplingCounts = 128;
         dataSetIndex = 0;
+        this.resultCallback = resultCallback;
 
         HandlerThread dataFusionHandlerThread = new HandlerThread("dataFusionHandlerThread");
         dataFusionHandlerThread.start();
@@ -79,5 +84,22 @@ public abstract class RecognizerAbstractClass {
     private void setDefaultSensors() {
         addSensorType(Sensor.TYPE_ACCELEROMETER);
         addSensorType(Sensor.TYPE_GYROSCOPE);
+    }
+
+    public double[] recognize() {
+        double confidences[] = new double[6];
+        Random rand = new Random();
+        double aggregate = 0;
+        double temp = 0;
+
+        for (int i = 0; i < 5; ++i) {
+            temp = rand.nextDouble() * (1-aggregate);
+            aggregate += temp;
+            confidences[i] = temp;
+        }
+
+        confidences[5] = 1 - aggregate;
+
+        return confidences;
     }
 }

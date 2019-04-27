@@ -9,8 +9,6 @@ import androidx.lifecycle.ViewModel;
 //import bu.edu.ec500.sshealthapp.db.Dao.MotionDao;
 
 public class MainViewModel extends ViewModel {
-
-
     private MutableLiveData<Double> accX;
     private MutableLiveData<Double> accY;
     private MutableLiveData<Double> accZ;
