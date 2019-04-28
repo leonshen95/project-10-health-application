@@ -77,22 +77,22 @@ public class RecognizedActivity {
         double result = 0;
         switch (type){
             case 0:
-                result = 0.005;
+                result = 2;
                 break;
             case 1:
-                result = 0.001;
+                result = 1;
                 break;
             case 2:
-                result = 0.10;
+                result = 3;
                 break;
             case 3:
-                result = 0.05;
+                result = 3;
                 break;
             case 4:
-                result = 0.00005;
+                result = 1;
                 break;
             case 5:
-                result = 0.00001;
+                result = 1;
                 break;
             default:
                 break;

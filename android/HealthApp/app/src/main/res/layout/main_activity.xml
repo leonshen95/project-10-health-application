@@ -60,7 +60,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="367dp">
 
 
         <TextView
@@ -70,7 +70,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="40sp"/>
+            android:textSize="40sp" />
 
         <TextView
             android:id="@+id/textRemaining"
@@ -79,15 +79,15 @@
             android:layout_below="@+id/textPercentage"
             android:layout_centerHorizontal="true"
             android:maxWidth="200dp"
-            android:textAppearance="?android:attr/textAppearanceSmall"/>
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <com.hookedonplay.decoviewlib.DecoView xmlns:custom="http://schemas.android.com/apk/res-auto"
             android:id="@+id/dynamicArcView"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginLeft="13dp"
             android:layout_width="312dp"
             android:layout_height="318dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="20dp"
             custom:dv_lineWidth="22dp">
 
         </com.hookedonplay.decoviewlib.DecoView>
@@ -103,9 +103,11 @@
         android:layout_marginStart="10dp"
         android:layout_marginLeft="13dp"
         android:layout_marginBottom="160dp"
-        android:paddingRight="4dp"
         android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:paddingRight="4dp"
+        android:text="Walking"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <TextView
         android:id="@+id/textstanding"
         android:layout_width="wrap_content"
@@ -116,9 +118,11 @@
         android:layout_marginStart="10dp"
         android:layout_marginLeft="13dp"
         android:layout_marginBottom="100dp"
-        android:paddingRight="4dp"
         android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:paddingRight="4dp"
+        android:text="Standing"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <TextView
         android:id="@+id/textwalkingup"
         android:layout_width="wrap_content"
@@ -129,9 +133,11 @@
         android:layout_marginStart="10dp"
         android:layout_marginLeft="13dp"
         android:layout_marginBottom="40dp"
-        android:paddingRight="4dp"
         android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:paddingRight="4dp"
+        android:text="WalkUp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <TextView
         android:id="@+id/textwalkdn"
         android:layout_width="wrap_content"
@@ -142,9 +148,11 @@
         android:layout_marginStart="230dp"
         android:layout_marginLeft="13dp"
         android:layout_marginBottom="160dp"
-        android:paddingRight="4dp"
         android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:paddingRight="4dp"
+        android:text="WalkDown"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <TextView
         android:id="@+id/textlaying"
         android:layout_width="wrap_content"
@@ -155,9 +163,11 @@
         android:layout_marginStart="230dp"
         android:layout_marginLeft="13dp"
         android:layout_marginBottom="100dp"
-        android:paddingRight="4dp"
         android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:paddingRight="4dp"
+        android:text="Laying"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <TextView
         android:id="@+id/textsitting"
         android:layout_width="wrap_content"
@@ -168,9 +178,11 @@
         android:layout_marginStart="230dp"
         android:layout_marginLeft="13dp"
         android:layout_marginBottom="40dp"
-        android:paddingRight="4dp"
         android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:paddingRight="4dp"
+        android:text="Sitting"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <TextView
         android:id="@+id/walking"
         android:layout_width="wrap_content"
@@ -181,9 +193,10 @@
         android:layout_marginStart="100dp"
         android:layout_marginLeft="13dp"
         android:layout_marginBottom="160dp"
-        android:paddingRight="4dp"
         android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:paddingRight="4dp"
+        android:text="0 Cal"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/standing"
@@ -195,9 +208,10 @@
         android:layout_marginStart="100dp"
         android:layout_marginLeft="13dp"
         android:layout_marginBottom="100dp"
-        android:paddingRight="4dp"
         android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:paddingRight="4dp"
+        android:text="0 Cal"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
     <TextView
@@ -210,9 +224,10 @@
         android:layout_marginStart="100dp"
         android:layout_marginLeft="13dp"
         android:layout_marginBottom="40dp"
-        android:paddingRight="4dp"
         android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:paddingRight="4dp"
+        android:text="0 Cal"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/walkdownstair"
@@ -224,9 +239,10 @@
         android:layout_marginStart="320dp"
         android:layout_marginLeft="13dp"
         android:layout_marginBottom="160dp"
-        android:paddingRight="4dp"
         android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:paddingRight="4dp"
+        android:text="0 Cal"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/laying"
@@ -238,9 +254,10 @@
         android:layout_marginStart="320dp"
         android:layout_marginLeft="13dp"
         android:layout_marginBottom="100dp"
-        android:paddingRight="4dp"
         android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:paddingRight="4dp"
+        android:text="0 Cal"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/sitting"
@@ -252,7 +269,8 @@
         android:layout_marginStart="320dp"
         android:layout_marginLeft="13dp"
         android:layout_marginBottom="40dp"
-        android:paddingRight="4dp"
         android:gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:paddingRight="4dp"
+        android:text="0 Cal"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 </RelativeLayout>
