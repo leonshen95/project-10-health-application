@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
      * Maximum value for each data series in the {@link DecoView}. This can be different for each
      * data series, in this example we are applying the same all data series
      */
-    private final float mSeriesMax = 1000f;
+    private final float mSeriesMax = 100f;
 
     private int mBackIndex;
     private int mSeriesIndex;
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         // Setup events to be fired on a schedule
         createInitialEvents();
 
-        mSensorRecogImpl.init(this);
+        //mSensorRecogImpl.init(this);
     }
 
     @Override
@@ -164,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .build());
+
+        mSensorRecogImpl.init(this);
     }
 
     private void resetText() {
@@ -221,15 +223,32 @@ public class MainActivity extends AppCompatActivity {
                             .setDelay(100)
                             .build());
                 } else {
-                    totalClo = 0;
-                    for (int i = 0; i < caloris.length; ++i) {
-                        caloris[i] = 0;
-                    }
-                    resetText();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mSensorRecogImpl.stop();
+                        }
+                    });
+                    mDecoView.addEvent(new DecoEvent.Builder(mSeriesMax)
+                            .setIndex(mSeriesIndex)
+                            .setDelay(100)
+                            .setListener(new DecoEvent.ExecuteEventListener() {
+                                @Override
+                                public void onEventStart(DecoEvent decoEvent) {
+
+                                }
+
+                                @Override
+                                public void onEventEnd(DecoEvent decoEvent) {
+
+                                }
+                            })
+                            .build());
+
                     //isUIReady = false;
                     mDecoView.addEvent(new DecoEvent.Builder(DecoDrawEffect.EffectType.EFFECT_SPIRAL_EXPLODE)
                             .setIndex(mSeriesIndex)
-                            .setDelay(500)
+                            .setDelay(3000)
                             .setDuration(3000)
                             .setDisplayText("GOAL!")
                             .setListener(new DecoEvent.ExecuteEventListener() {
@@ -240,7 +259,17 @@ public class MainActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onEventEnd(DecoEvent decoEvent) {
-                                    createInitialEvents();
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            totalClo = 0;
+                                            for (int i = 0; i < caloris.length; ++i) {
+                                                caloris[i] = 0;
+                                            }
+                                            resetText();
+                                            createInitialEvents();
+                                        }
+                                    });
                                 }
                             })
                             .build());
