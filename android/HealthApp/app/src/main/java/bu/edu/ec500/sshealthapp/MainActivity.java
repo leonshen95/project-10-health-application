@@ -9,6 +9,9 @@ import bu.edu.ec500.sshealthapp.ui.main.MainViewModel;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.AnticipateInterpolator;
+import android.widget.Button;
 //import android.support.v7.app.AppCompatActivity;
 import android.view.animation.AnticipateInterpolator;
 import android.widget.TextView;
@@ -28,7 +31,7 @@ import java.util.Locale;
  *
  * @see <a href="https://github.com/bmarrdev/android-DecoView-charting">DecoView on GitHub</a>
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements myDialog.myDialogListener{
 
     private boolean isUIReady = true;
 
@@ -68,7 +71,13 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < activityCloTextViewIds.length; ++i) {
             textViews[i] = (TextView) findViewById(activityCloTextViewIds[i]);
         }
-
+        setGoal = (Button)findViewById(R.id.setGoal);
+        setGoal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDiaglog();
+            }
+        });
         mDecoView = (DecoView) findViewById(R.id.dynamicArcView);
 
         mSensorRecogImpl = new SensorRecognizeImpl(new MainActivity.MyInitCallback(), new MainActivity.MyCallback());
@@ -81,6 +90,14 @@ public class MainActivity extends AppCompatActivity {
         createInitialEvents();
 
         //mSensorRecogImpl.init(this);
+    }
+    public void openDiaglog(){
+        myDialog Dialog = new myDialog();
+        Dialog.show(getSupportFragmentManager(),"my Dialog");
+    }
+    @Override
+    public void applyVal(float max){
+        mSeriesMax = max;
     }
 
     @Override
