@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import bu.edu.ec500.sshealthapp.ui.main.MainFragment;
 import bu.edu.ec500.sshealthapp.ui.main.MainViewModel;
+import bu.edu.ec500.sshealthapp.ui.main.myDialog;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements myDialog.myDialog
      * Maximum value for each data series in the {@link DecoView}. This can be different for each
      * data series, in this example we are applying the same all data series
      */
-    private final float mSeriesMax = 100f;
+    private float mSeriesMax = 100f;
+    private Button setGoal;
 
     private int mBackIndex;
     private int mSeriesIndex;
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements myDialog.myDialog
         setGoal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mSensorRecogImpl.stop();
                 openDiaglog();
             }
         });
@@ -97,7 +100,18 @@ public class MainActivity extends AppCompatActivity implements myDialog.myDialog
     }
     @Override
     public void applyVal(float max){
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                mSensorRecogImpl.stop();
+//            }
+//        });
+//        mSensorRecogImpl.stop();
+        resetText();
         mSeriesMax = max;
+        createBackSeries();
+        createDataSeries();
+        createInitialEvents();
     }
 
     @Override

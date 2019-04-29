@@ -36,7 +36,7 @@ public class myDialog extends AppCompatDialogFragment {
                         listener.applyVal(max);
                     }
                 });
-        NumberPicker np1 = view.findViewById(R.id.np1);
+        np1 = view.findViewById(R.id.np1);
         np1.setMinValue(0);
         np1.setMaxValue(1000);
         np1.setWrapSelectorWheel(true);
