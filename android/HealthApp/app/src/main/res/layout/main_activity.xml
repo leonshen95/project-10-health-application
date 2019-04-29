@@ -61,7 +61,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="367dp">
-
+        <Button
+            android:id="@+id/setGoal"
+            android:text="new goal"
+            android:layout_width="wrap_content"
+            android:layout_above="@id/textPercentage"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content">
+        </Button>
 
         <TextView
             android:id="@+id/textPercentage"
