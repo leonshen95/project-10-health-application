@@ -26,12 +26,15 @@ public abstract class RecognizerAbstractClass {
 
     public AppResultCallback resultCallback;
 
-    RecognizerAbstractClass(AppResultCallback resultCallback) {
+    public MyClassifier myClassifier;
+
+    RecognizerAbstractClass(MyClassifier classifier, AppResultCallback resultCallback) {
         chosenSensors = new SparseIntArray();
         samplingInterval = 20;
         samplingCounts = 128;
         dataSetIndex = 0;
         this.resultCallback = resultCallback;
+        this.myClassifier = classifier;
 
         HandlerThread dataFusionHandlerThread = new HandlerThread("dataFusionHandlerThread");
         dataFusionHandlerThread.start();

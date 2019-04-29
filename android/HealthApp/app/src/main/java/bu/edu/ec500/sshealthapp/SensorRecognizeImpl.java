@@ -55,7 +55,8 @@ public class SensorRecognizeImpl {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             myBinder = (SensorService.MyBinder) service;
-            HumanActivityRecognizer humanActivityRecognizer = new HumanActivityRecognizer(resultCallback);
+            MyClassifier myClassifier = new MyClassifier(ctx);
+            HumanActivityRecognizer humanActivityRecognizer = new HumanActivityRecognizer(myClassifier, resultCallback);
             myBinder.setRecognizer(humanActivityRecognizer);
             initCallback.onSucceeded();
             isInitialized = true;

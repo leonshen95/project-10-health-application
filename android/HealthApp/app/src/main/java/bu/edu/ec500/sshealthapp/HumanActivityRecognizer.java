@@ -1,8 +1,8 @@
 package bu.edu.ec500.sshealthapp;
 
 public class HumanActivityRecognizer extends RecognizerAbstractClass {
-    public HumanActivityRecognizer(AppResultCallback resultCallback) {
-        super(resultCallback);
+    public HumanActivityRecognizer(MyClassifier myClassifier, AppResultCallback resultCallback) {
+        super(myClassifier, resultCallback);
     }
 
     @Override

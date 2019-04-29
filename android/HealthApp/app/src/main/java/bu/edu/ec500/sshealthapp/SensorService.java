@@ -134,7 +134,9 @@ public class SensorService extends Service implements SensorEventListener {
                             mRecognizer.recognitionHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    mRecognizer.onResult(mRecognizer.recognize());
+                                    mRecognizer.onResult(mRecognizer.myClassifier.recognize(
+                                            mRecognizer.dataSet,
+                                            mRecognizer.getSamplingPointCount()));
                                 }
                             });
                         } catch (Throwable t) {

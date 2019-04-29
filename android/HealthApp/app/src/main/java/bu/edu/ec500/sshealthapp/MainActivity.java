@@ -30,7 +30,7 @@ import java.util.Locale;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private boolean isUIReady = false;
+    private boolean isUIReady = true;
 
     /**
      * DecoView animated arc based chart
@@ -166,56 +166,13 @@ public class MainActivity extends AppCompatActivity {
                 .build());
     }
 
-//
-//            mDecoView.addEvent(new DecoEvent.Builder(DecoDrawEffect.EffectType.EFFECT_SPIRAL_EXPLODE)
-//                    .setIndex(mSeries1Index)
-//                    .setDelay(39000)
-//                    .setDuration(3000)
-//                    .setDisplayText("GOAL!")
-//                    .setListener(new DecoEvent.ExecuteEventListener() {
-//                        @Override
-//                        public void onEventStart(DecoEvent decoEvent) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onEventEnd(DecoEvent decoEvent) {
-//                            createEvents();
-//                        }
-//                    })
-//                    .build());
-//
-//            resetText();
-//        }
-//        else {
-//            mDecoView.addEvent(new DecoEvent.Builder(DecoDrawEffect.EffectType.EFFECT_SPIRAL_EXPLODE)
-//                    .setIndex(mSeries1Index)
-//                    .setDelay(39000)
-//                    .setDuration(3000)
-//                    .setDisplayText("SO CLOSE!")
-//                    .setListener(new DecoEvent.ExecuteEventListener() {
-//                        @Override
-//                        public void onEventStart(DecoEvent decoEvent) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onEventEnd(DecoEvent decoEvent) {
-//                            createEvents();
-//                        }
-//                    })
-//                    .build());
-//
-//            resetText();
-//        }
-//    }
     private void resetText() {
-        ((TextView) findViewById(R.id.walking)).setText("");
-        ((TextView) findViewById(R.id.standing)).setText("");
-        ((TextView) findViewById(R.id.walkdownstair)).setText("");
-        ((TextView) findViewById(R.id.walkupstair)).setText("");
-        ((TextView) findViewById(R.id.laying)).setText("");
-        ((TextView) findViewById(R.id.sitting)).setText("");
+        ((TextView) findViewById(R.id.walking)).setText("0 Cal");
+        ((TextView) findViewById(R.id.standing)).setText("0 Cal");
+        ((TextView) findViewById(R.id.walkdownstair)).setText("0 Cal");
+        ((TextView) findViewById(R.id.walkupstair)).setText("0 Cal");
+        ((TextView) findViewById(R.id.laying)).setText("0 Cal");
+        ((TextView) findViewById(R.id.sitting)).setText("0 Cal");
         ((TextView) findViewById(R.id.textPercentage)).setText("");
         ((TextView) findViewById(R.id.textRemaining)).setText("");
     }
@@ -257,11 +214,38 @@ public class MainActivity extends AppCompatActivity {
 
             totalClo += RecognizedActivity.getActivityCalorisByType(activity.getActivityType()) *
                     results.time;
-//TODO:            if (totalClo >= mSeriesMax)
-            mDecoView.addEvent(new DecoEvent.Builder(totalClo)
-                    .setIndex(mSeriesIndex)
-                    .setDelay(100)
-                    .build());
+            if (isUIReady) {
+                if (totalClo < mSeriesMax) {
+                    mDecoView.addEvent(new DecoEvent.Builder(totalClo)
+                            .setIndex(mSeriesIndex)
+                            .setDelay(100)
+                            .build());
+                } else {
+                    totalClo = 0;
+                    for (int i = 0; i < caloris.length; ++i) {
+                        caloris[i] = 0;
+                    }
+                    resetText();
+                    //isUIReady = false;
+                    mDecoView.addEvent(new DecoEvent.Builder(DecoDrawEffect.EffectType.EFFECT_SPIRAL_EXPLODE)
+                            .setIndex(mSeriesIndex)
+                            .setDelay(500)
+                            .setDuration(3000)
+                            .setDisplayText("GOAL!")
+                            .setListener(new DecoEvent.ExecuteEventListener() {
+                                @Override
+                                public void onEventStart(DecoEvent decoEvent) {
+
+                                }
+
+                                @Override
+                                public void onEventEnd(DecoEvent decoEvent) {
+                                    createInitialEvents();
+                                }
+                            })
+                            .build());
+                }
+            }
         }
     }
 
