@@ -113,7 +113,10 @@ public class MainActivity extends AppCompatActivity implements myDialog.myDialog
         createDataSeries();
         createInitialEvents();
     }
-
+    @Override
+    public void Resume() {
+        mSensorRecogImpl.start();
+    }
     @Override
     protected void onResume() {
         super.onResume();
