@@ -26,7 +26,7 @@ public class myDialog extends AppCompatDialogFragment {
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        listener.Resume();
                     }
                 })
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -54,6 +54,7 @@ public class myDialog extends AppCompatDialogFragment {
     }
     public interface myDialogListener{
         void applyVal(float max);
+        void Resume();
     }
 
 }
