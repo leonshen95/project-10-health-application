@@ -92,8 +92,7 @@
             android:id="@+id/dynamicArcView"
             android:layout_width="312dp"
             android:layout_height="318dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginLeft="13dp"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             custom:dv_lineWidth="22dp">
 
