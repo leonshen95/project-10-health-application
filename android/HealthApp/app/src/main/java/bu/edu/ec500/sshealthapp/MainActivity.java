@@ -73,6 +73,11 @@ public class MainActivity extends AppCompatActivity implements myDialog.myDialog
         for (int i = 0; i < activityCloTextViewIds.length; ++i) {
             textViews[i] = (TextView) findViewById(activityCloTextViewIds[i]);
         }
+
+        mDecoView = (DecoView) findViewById(R.id.dynamicArcView);
+
+        mSensorRecogImpl = new SensorRecognizeImpl(new MainActivity.MyInitCallback(), new MainActivity.MyCallback());
+
         setGoal = (Button)findViewById(R.id.setGoal);
         setGoal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,9 +86,6 @@ public class MainActivity extends AppCompatActivity implements myDialog.myDialog
                 openDiaglog();
             }
         });
-        mDecoView = (DecoView) findViewById(R.id.dynamicArcView);
-
-        mSensorRecogImpl = new SensorRecognizeImpl(new MainActivity.MyInitCallback(), new MainActivity.MyCallback());
 
         // Create required data series on the DecoView
         createBackSeries();
@@ -94,29 +96,26 @@ public class MainActivity extends AppCompatActivity implements myDialog.myDialog
 
         //mSensorRecogImpl.init(this);
     }
+
     public void openDiaglog(){
         myDialog Dialog = new myDialog();
         Dialog.show(getSupportFragmentManager(),"my Dialog");
     }
+
     @Override
     public void applyVal(float max){
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                mSensorRecogImpl.stop();
-//            }
-//        });
-//        mSensorRecogImpl.stop();
         resetText();
         mSeriesMax = max;
         createBackSeries();
         createDataSeries();
         createInitialEvents();
     }
+
     @Override
     public void Resume() {
-        mSensorRecogImpl.start();
+        mSensorRecogImpl.init(this);
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -260,7 +259,13 @@ public class MainActivity extends AppCompatActivity implements myDialog.myDialog
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            setGoal.setVisibility(View.INVISIBLE);
                             mSensorRecogImpl.stop();
+                            totalClo = 0;
+                            for (int i = 0; i < caloris.length; ++i) {
+                                caloris[i] = 0;
+                            }
+                            resetText();
                         }
                     });
                     mDecoView.addEvent(new DecoEvent.Builder(mSeriesMax)
@@ -296,12 +301,8 @@ public class MainActivity extends AppCompatActivity implements myDialog.myDialog
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            totalClo = 0;
-                                            for (int i = 0; i < caloris.length; ++i) {
-                                                caloris[i] = 0;
-                                            }
-                                            resetText();
                                             createInitialEvents();
+                                            setGoal.setVisibility(View.VISIBLE);
                                         }
                                     });
                                 }
