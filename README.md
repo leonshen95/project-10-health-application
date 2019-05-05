@@ -58,7 +58,9 @@ implement&test android application
 - The sensor thread will resume again after clicking "ok" or "cancel".
 <img src="./images/UI.2.png">
 
-- 
+- Animated "GOAL" will explode after user reaches designated goal value.
+<img src="./images/UI.3.png">
+
 ## Team Members
 * Leyang Shen
 * Yuxuan Su
